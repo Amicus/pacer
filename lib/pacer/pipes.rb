@@ -12,8 +12,8 @@ module Pacer
     import com.tinkerpop.pipes.filter.RangeFilterPipe
     import com.tinkerpop.pipes.filter.FilterPipe
 
-    #import com.tinkerpop.gremlin.pipes.transform.IdPipe
-    #import com.tinkerpop.gremlin.pipes.transform.PropertyPipe
+    import com.tinkerpop.gremlin.pipes.transform.IdPipe
+    import com.tinkerpop.gremlin.pipes.transform.PropertyPipe
 
     IN = com.tinkerpop.blueprints.Direction::IN
     OUT = com.tinkerpop.blueprints.Direction::OUT
