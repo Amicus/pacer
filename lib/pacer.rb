@@ -37,7 +37,18 @@ module Pacer
     Enumerator = Enumerable::Enumerator
   end
 
-  require JAR
+  begin
+    # we call both of these here, if they don't exist, we trigger a name error and load the JAR
+    com.tinkerpop.blueprints.Graph
+    com.tinkerpop.pipes.AbstractPipe
+    com.tinkerpop.gremlin.pipes.transform.OutVertexPipe
+    STDERR.puts <<WARNING
+WARNING: com.tinkerpop.blueprints.Graph was already defined, we are
+  using yours instead of loading our version, which would have been: #{BLUEPRINTS_VERSION}
+WARNING
+  rescue NameError
+    require JAR
+  end
 
   require 'pacer/loader'
 
