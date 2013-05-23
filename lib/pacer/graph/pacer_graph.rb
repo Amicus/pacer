@@ -1,4 +1,6 @@
 module Pacer
+  import com.tinkerpop.blueprints.Parameter
+
   class PacerGraph
     include GraphTransactionsMixin
 
@@ -371,7 +373,7 @@ module Pacer
     include Indices
 
     module KeyIndices
-      def create_key_index(name, type = :vertex, opts={})
+      def create_key_index(name, type = :vertex, opts = {})
         params = build_key_index_parameters_from opts
         if features.supportsKeyIndices
           if element_type(type) == :vertex and features.supportsVertexKeyIndex
@@ -426,14 +428,12 @@ module Pacer
       end
 
       def build_key_index_parameters_from(option_hash)
-        params = []
-        option_hash.each do |key, value|
+        option_hash.each_with_object([]) do |(key, value), params|
           params << Pacer::Parameter.new(key, value)
         end
-        
-        params        
       end
     end
+
     include KeyIndices
 
     module ElementType
